@@ -1,0 +1,1 @@
+calgary = 'https://www.hockey-reference.com/teams/CGY/'
