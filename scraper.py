@@ -5,7 +5,7 @@ import pandas as pd
 from io import StringIO
 
 # source set up
-url = teamLinks.calgary
+url = teamLinks.links["seattle"]
 response = requests.get(url)
 html = response.text
 soup = BeautifulSoup(html, "lxml")

@@ -1,1 +1,36 @@
-calgary = 'https://www.hockey-reference.com/teams/CGY/'
+
+links = {
+    'anaheim': 'https://www.hockey-reference.com/teams/ANA/',
+    'arizona': 'https://www.hockey-reference.com/teams/ARI/',
+    'boston': 'https://www.hockey-reference.com/teams/BOS/',
+    'buffalo': 'https://www.hockey-reference.com/teams/BUF/',
+    'calgary': 'https://www.hockey-reference.com/teams/CGY/',
+    'carolina': 'https://www.hockey-reference.com/teams/CAR/',
+    'chicago': 'https://www.hockey-reference.com/teams/CHI/',
+    'colorado': 'https://www.hockey-reference.com/teams/COL/',
+    'columbus': 'https://www.hockey-reference.com/teams/CBJ/',
+    'dallas': 'https://www.hockey-reference.com/teams/DAL/',
+    'detroit': 'https://www.hockey-reference.com/teams/DET/',
+    'edmonton': 'https://www.hockey-reference.com/teams/EDM/',
+    'florida': 'https://www.hockey-reference.com/teams/FLA/',
+    'los_angeles': 'https://www.hockey-reference.com/teams/LAK/',
+    'minnesota': 'https://www.hockey-reference.com/teams/MIN/',
+    'montreal': 'https://www.hockey-reference.com/teams/MTL/',
+    'nashville': 'https://www.hockey-reference.com/teams/NSH/',
+    'new_jersey': 'https://www.hockey-reference.com/teams/NJD/',
+    'new_york_i': 'https://www.hockey-reference.com/teams/NYI/',
+    'new_york_r': 'https://www.hockey-reference.com/teams/NYR/',
+    'ottawa': 'https://www.hockey-reference.com/teams/OTT/',
+    'philadelphia': 'https://www.hockey-reference.com/teams/PHI/',
+    'pittsburgh': 'https://www.hockey-reference.com/teams/PIT/',
+    'san_jose': 'https://www.hockey-reference.com/teams/SJS/',
+    'seattle': 'https://www.hockey-reference.com/teams/SEA/',
+    'st_louis': 'https://www.hockey-reference.com/teams/STL/',
+    'tampa_bay': 'https://www.hockey-reference.com/teams/TBL/',
+    'toronto': 'https://www.hockey-reference.com/teams/TOR/',
+    'vancouver': 'https://www.hockey-reference.com/teams/VAN/',
+    'vegas': 'https://www.hockey-reference.com/teams/VEG/',
+    'washington': 'https://www.hockey-reference.com/teams/WSH/',
+    'winnipeg': 'https://www.hockey-reference.com/teams/WPG/'
+}
+
