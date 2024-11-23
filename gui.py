@@ -126,18 +126,21 @@ class MainWindow(QMainWindow, Scraper):
             if idx == 0:
                 away_layout = QHBoxLayout(container)
                 away_layout.setAlignment(Qt.AlignVCenter)
-                away_layout.setContentsMargins(150,0,10,0)
+                away_layout.setContentsMargins(40,0,10,0)
+                away_layout.setSpacing(30)
                 
                 # Create label for team name
-                team_name = QLabel("11-1-1")
+                team_record = QLabel("11-1-1")
                 font = QFont("Arial", 20, QFont.Weight.Bold)
                 font.setItalic(True)
-                team_name.setFont(font)
-                team_name.setStyleSheet("""
+                team_record.setFont(font)
+                team_record.setStyleSheet("""
                     color: white;
                     font-weight: 900;
                 """)
                 
+                away_layout.addWidget(team_record)
+
                 # Create label for team name
                 team_name = QLabel("WINNIPEG")
                 font = QFont("Arial", 50, QFont.Weight.Bold)
