@@ -12,8 +12,7 @@ class MainWindow(QMainWindow, Scraper):
         Scraper.__init__(self) # get functions from custom scraper
         
         self.setWindowTitle("NHL DFS Assistant")
-        self.showMaximized()  # Set to fullscreen mode
-
+        
         # dark gray bg
         self.setStyleSheet("background-color: #1a1a1a;")
         
@@ -21,6 +20,7 @@ class MainWindow(QMainWindow, Scraper):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         
+        # get matchup data
         self.matchups = self.get_daily_matchups()
         self.num_games = self.get_num_games()
         
@@ -48,7 +48,7 @@ class MainWindow(QMainWindow, Scraper):
         self.display_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # matchup containers
-        for i in range(18):
+        for i in range(15):
             button = QPushButton(chr(65 + i))
             button.setStyleSheet("background-color: #333333; color: white; border: none;")
             button.setFixedWidth(200)
@@ -62,10 +62,10 @@ class MainWindow(QMainWindow, Scraper):
 
         main_layout.addWidget(scroll_area)
         main_layout.addWidget(self.display_label)
-        main_layout.addStretch()
+        main_layout.addStretch()       
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
-    window.show()
+    window.showMaximized()
     sys.exit(app.exec())
