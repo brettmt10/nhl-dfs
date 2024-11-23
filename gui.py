@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget,
                              QScrollArea, QSpacerItem, QSizePolicy)
 from PySide6.QtCore import Qt, QByteArray
 from PySide6.QtSvgWidgets import QSvgWidget
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QFont
 
 from scraper import Scraper
 
@@ -122,18 +122,34 @@ class MainWindow(QMainWindow, Scraper):
         team_containers = [self.selected_matchup_area.layout().itemAt(i).widget() 
                             for i in (0, 2)]
 
-        for container in team_containers:
-            first_team_layout = QHBoxLayout(container)
-            first_team_layout.setContentsMargins(500, 0, 0, 0)
+        for idx, container in enumerate(team_containers):
+            if idx == 0:
+                away_layout = QHBoxLayout(container)
+                away_layout.setAlignment(Qt.AlignVCenter)
+                away_layout.setContentsMargins(380,0,0,0)
+                away_layout.setSpacing(40)
+                                                           
+                logo_widget = QSvgWidget("./img/logo_winnipeg.svg")
+                logo_widget.setFixedSize(100, 100)
                         
-            logo_widget = QSvgWidget("./img/logo_winnipeg.svg")
-            logo_widget.setFixedSize(100, 100)
-                        
-            # keep aspect ratio
-            renderer = logo_widget.renderer()
-            renderer.setAspectRatioMode(Qt.KeepAspectRatio)
+                # keep aspect ratio
+                renderer = logo_widget.renderer()
+                renderer.setAspectRatioMode(Qt.KeepAspectRatio)
 
-            first_team_layout.addWidget(logo_widget, 0, Qt.AlignVCenter)
+                away_layout.addWidget(logo_widget)
+                
+                logo_widget2 = QSvgWidget("./img/logo_anaheim.svg")
+                logo_widget2.setFixedSize(100, 100)
+                            
+                # keep aspect ratio
+                renderer = logo_widget2.renderer()
+                renderer.setAspectRatioMode(Qt.KeepAspectRatio)
+
+                away_layout.addWidget(logo_widget2)
+
+            else:
+                pass
+                
                   
     def change_selected_matchup_bar(self):
         self.change_selected_matchup_bar_backgrounds()
