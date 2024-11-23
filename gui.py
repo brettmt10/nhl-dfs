@@ -68,7 +68,7 @@ class MainWindow(QMainWindow, Scraper):
             """)
             matchup_section_button.setFixedWidth(200)
             matchup_section_button.setFixedHeight(96)
-            matchup_section_button.clicked.connect(lambda checked, l=chr(65 + i): print(l))
+            matchup_section_button.clicked.connect(lambda checked: self.change_selected_matchup_bar_backgrounds())
             matchups_scroll_layout.addWidget(matchup_section_button)
             
     def config_selected_matchup_bar(self):
@@ -104,6 +104,14 @@ class MainWindow(QMainWindow, Scraper):
             team_container = QWidget()
             team_container.setStyleSheet("background-color: #0c0c0c;")
             player_data_layout.addWidget(team_container)
+    
+    # when a game is selected, change the background colors of the selected matchup containers
+    def change_selected_matchup_bar_backgrounds(self):
+        team_containers = [self.selected_matchup_area.layout().itemAt(i).widget() 
+                            for i in (0, 2)]
+        
+        team_containers[0].setStyleSheet(f"background-color: blue;")
+        team_containers[1].setStyleSheet(f"background-color: green;")
         
     def create_gui(self):     
         # add all widgets to main layout
