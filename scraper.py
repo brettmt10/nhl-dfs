@@ -13,9 +13,6 @@ class Scraper():
         self.schedule = self.client.schedule.get_schedule(date="2024-11-22").get('games')
         self.num_games = len(self.schedule)
         self.matchups = []
-            
-    def get_daily_matchups(self):
-        return self.matchups
     
     def get_num_games(self):
         return self.num_games
@@ -30,8 +27,7 @@ class Scraper():
         timezone = pytz.timezone('America/New_York')
         formatted_match_time = time.astimezone(timezone).strftime('%I:%M %p')
         
-        return(formatted_match_time)
-    
+        return(formatted_match_time) 
     
     # get matchup info (not player data)
     def get_matchup(self, schedule, i):
@@ -51,7 +47,9 @@ class Scraper():
     # get each matchup's info 
     def get_all_matchups(self):
         for i in range(self.num_games):
-            self.matchups.append(self.get_all_matchups(self.schedule, i))
+            self.matchups.append(self.get_matchup(self.schedule, i))
+            
+        return self.matchups
                 
     def get_team_player_data():
         # source set up

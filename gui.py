@@ -21,8 +21,9 @@ class MainWindow(QMainWindow, Scraper):
         self.setCentralWidget(central_widget)
         
         # get matchup data
-        self.matchups = self.get_daily_matchups()
+        self.matchups = self.get_all_matchups()
         self.num_games = self.get_num_games()
+        print(self.matchups, self.num_games)
         
         # main layout
         main_layout = QVBoxLayout(central_widget)
