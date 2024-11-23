@@ -1,8 +1,12 @@
 import sys
+import requests
+
 from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, 
                              QHBoxLayout, QVBoxLayout, QPushButton, QLabel,
-                             QScrollArea)
-from PySide6.QtCore import Qt
+                             QScrollArea, QSpacerItem, QSizePolicy)
+from PySide6.QtCore import Qt, QByteArray
+from PySide6.QtSvgWidgets import QSvgWidget
+from PySide6.QtGui import QPixmap
 
 from scraper import Scraper
 
@@ -68,7 +72,7 @@ class MainWindow(QMainWindow, Scraper):
             """)
             matchup_section_button.setFixedWidth(200)
             matchup_section_button.setFixedHeight(96)
-            matchup_section_button.clicked.connect(lambda checked: self.change_selected_matchup_bar_backgrounds())
+            matchup_section_button.clicked.connect(lambda checked: self.change_selected_matchup_bar())
             matchups_scroll_layout.addWidget(matchup_section_button)
             
     def config_selected_matchup_bar(self):
@@ -112,6 +116,26 @@ class MainWindow(QMainWindow, Scraper):
         
         team_containers[0].setStyleSheet(f"background-color: blue;")
         team_containers[1].setStyleSheet(f"background-color: green;")
+        
+    def change_selected_matchup_bar_name_and_logo(self):
+        team_containers = [self.selected_matchup_area.layout().itemAt(i).widget() 
+                            for i in (0, 2)]
+        
+        for container in team_containers:
+            first_team_layout = QHBoxLayout(container)
+            
+            logo_widget = QSvgWidget("./img/logo_winnipeg.svg")
+            logo_widget.setFixedSize(100, 100)
+                        
+            # keep aspect ratio
+            renderer = logo_widget.renderer()
+            renderer.setAspectRatioMode(Qt.KeepAspectRatio)
+
+            first_team_layout.addWidget(logo_widget)
+            
+    def change_selected_matchup_bar(self):
+        self.change_selected_matchup_bar_backgrounds()
+        self.change_selected_matchup_bar_name_and_logo()
         
     def create_gui(self):     
         # add all widgets to main layout
