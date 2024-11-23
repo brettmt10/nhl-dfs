@@ -126,26 +126,37 @@ class MainWindow(QMainWindow, Scraper):
             if idx == 0:
                 away_layout = QHBoxLayout(container)
                 away_layout.setAlignment(Qt.AlignVCenter)
-                away_layout.setContentsMargins(380,0,0,0)
-                away_layout.setSpacing(40)
-                                                           
+                away_layout.setContentsMargins(150,0,10,0)
+                
+                # Create label for team name
+                team_name = QLabel("11-1-1")
+                font = QFont("Arial", 20, QFont.Weight.Bold)
+                font.setItalic(True)
+                team_name.setFont(font)
+                team_name.setStyleSheet("""
+                    color: white;
+                    font-weight: 900;
+                """)
+                
+                # Create label for team name
+                team_name = QLabel("WINNIPEG")
+                font = QFont("Arial", 50, QFont.Weight.Bold)
+                font.setItalic(True)
+                team_name.setFont(font)
+                team_name.setStyleSheet("""
+                    color: white;
+                    font-weight: 900;
+                """)
+
+                away_layout.addWidget(team_name)
+                                                                           
                 logo_widget = QSvgWidget("./img/logo_winnipeg.svg")
                 logo_widget.setFixedSize(100, 100)
                         
-                # keep aspect ratio
                 renderer = logo_widget.renderer()
                 renderer.setAspectRatioMode(Qt.KeepAspectRatio)
 
                 away_layout.addWidget(logo_widget)
-                
-                logo_widget2 = QSvgWidget("./img/logo_anaheim.svg")
-                logo_widget2.setFixedSize(100, 100)
-                            
-                # keep aspect ratio
-                renderer = logo_widget2.renderer()
-                renderer.setAspectRatioMode(Qt.KeepAspectRatio)
-
-                away_layout.addWidget(logo_widget2)
 
             else:
                 pass
