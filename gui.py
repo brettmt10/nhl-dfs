@@ -73,27 +73,27 @@ class MainWindow(QMainWindow, Scraper):
         selected_matchup_layout.setContentsMargins(0, 0, 0, 0)
         selected_matchup_layout.setSpacing(1)
         
-        # create two containers for second bar
+        # create two containers for each team in second bar
         for i in range(2):
             team_container = QWidget()
             team_container.setStyleSheet("background-color: #111111;")
             selected_matchup_layout.addWidget(team_container)
             
-            # Add vertical line after first container
+            # vertical line between two selected teams
             if i == 0:
                 line = QWidget()
                 line.setStyleSheet("background-color: white;")
                 line.setFixedWidth(1)  # 1px wide line
                 selected_matchup_layout.addWidget(line)
             
-        # create bottom container that fills remaining space
+        # create bottom container that fills remaining space for player data of selected teams
         player_data_container = QWidget()
         player_data_container.setStyleSheet("background-color: #ffffff;")
         player_data_layout = QHBoxLayout(player_data_container)
         player_data_layout.setContentsMargins(0, 0, 0, 0)
         player_data_layout.setSpacing(1)  # maintains the 1px gap like other containers
 
-        # create two equal-width containers
+        # create a container for the two selected teams that fills the bottom container
         for i in range(2):
             team_container = QWidget()
             team_container.setStyleSheet("background-color: #0c0c0c;")
