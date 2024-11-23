@@ -70,6 +70,7 @@ class MainWindow(QMainWindow, Scraper):
                     background-color: #333333;
                 }
             """)
+            
             matchup_section_button.setFixedWidth(200)
             matchup_section_button.setFixedHeight(96)
             matchup_section_button.clicked.connect(lambda checked: self.change_selected_matchup_bar())
@@ -120,10 +121,11 @@ class MainWindow(QMainWindow, Scraper):
     def change_selected_matchup_bar_name_and_logo(self):
         team_containers = [self.selected_matchup_area.layout().itemAt(i).widget() 
                             for i in (0, 2)]
-        
+
         for container in team_containers:
             first_team_layout = QHBoxLayout(container)
-            
+            first_team_layout.setContentsMargins(500, 0, 0, 0)
+                        
             logo_widget = QSvgWidget("./img/logo_winnipeg.svg")
             logo_widget.setFixedSize(100, 100)
                         
@@ -131,8 +133,8 @@ class MainWindow(QMainWindow, Scraper):
             renderer = logo_widget.renderer()
             renderer.setAspectRatioMode(Qt.KeepAspectRatio)
 
-            first_team_layout.addWidget(logo_widget)
-            
+            first_team_layout.addWidget(logo_widget, 0, Qt.AlignVCenter)
+                  
     def change_selected_matchup_bar(self):
         self.change_selected_matchup_bar_backgrounds()
         self.change_selected_matchup_bar_name_and_logo()
