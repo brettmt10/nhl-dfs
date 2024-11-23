@@ -25,25 +25,31 @@ class MainWindow(QMainWindow, Scraper):
         self.num_games = self.get_num_games()
         
         # main layout
-        main_layout = QVBoxLayout(central_widget)
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(0)
+        self.main_layout = QVBoxLayout(central_widget)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.setSpacing(0)
         
+        self.matchups_area = QScrollArea()
+        self.matchups_scroll_widget = QWidget()
+        self.selected_matchup_area = QWidget()
+        self.player_data_container = QWidget()
+        
+        
+    def config_matchups_bar(self):
         # scrollable function for matchup bar
-        matchups_area = QScrollArea()
-        matchups_area.setStyleSheet("QScrollArea { background-color: #111111; border: 1px solid #000000; }")
-        matchups_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        matchups_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        matchups_area.setFixedHeight(96)
+        self.matchups_area.setStyleSheet("QScrollArea { background-color: #111111; border: 1px solid #000000; }")
+        self.matchups_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.matchups_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.matchups_area.setFixedHeight(96)
         
-        # matchup bar
-        matchups_scroll_widget = QWidget()
-        matchups_scroll_widget.setStyleSheet("background-color: #111111;")
-        matchups_scroll_layout = QHBoxLayout(matchups_scroll_widget)
+        # matchups layout with widget    
+        self.matchups_scroll_widget.setStyleSheet("background-color: #111111;")
+        self.matchups_scroll_widget.setFixedHeight(96)
+        matchups_scroll_layout = QHBoxLayout(self.matchups_scroll_widget)
         matchups_scroll_layout.setContentsMargins(0, 0, 0, 0)
         matchups_scroll_layout.setSpacing(1)
         
-        # matchup containers
+        # container for each matchup
         for i in range(15):
             matchup_section_button = QPushButton(chr(65 + i))
             matchup_section_button.setStyleSheet("""
@@ -65,11 +71,11 @@ class MainWindow(QMainWindow, Scraper):
             matchup_section_button.clicked.connect(lambda checked, l=chr(65 + i): print(l))
             matchups_scroll_layout.addWidget(matchup_section_button)
             
+    def config_selected_matchup_bar(self):
         # create second bar for selected matchup
-        selected_matchup_area = QWidget()
-        selected_matchup_area.setStyleSheet("background-color: #111111;")
-        selected_matchup_area.setFixedHeight(96)
-        selected_matchup_layout = QHBoxLayout(selected_matchup_area)
+        self.selected_matchup_area.setStyleSheet("background-color: #111111;")
+        self.selected_matchup_area.setFixedHeight(96)
+        selected_matchup_layout = QHBoxLayout(self.selected_matchup_area)
         selected_matchup_layout.setContentsMargins(0, 0, 0, 0)
         selected_matchup_layout.setSpacing(1)
         
@@ -83,13 +89,13 @@ class MainWindow(QMainWindow, Scraper):
             if i == 0:
                 line = QWidget()
                 line.setStyleSheet("background-color: white;")
-                line.setFixedWidth(1)  # 1px wide line
+                line.setFixedWidth(1)
                 selected_matchup_layout.addWidget(line)
-            
+      
+    def config_team_player_data_sections(self):  
         # create bottom container that fills remaining space for player data of selected teams
-        player_data_container = QWidget()
-        player_data_container.setStyleSheet("background-color: #ffffff;")
-        player_data_layout = QHBoxLayout(player_data_container)
+        self.player_data_container.setStyleSheet("background-color: #ffffff;")
+        player_data_layout = QHBoxLayout(self.player_data_container)
         player_data_layout.setContentsMargins(0, 0, 0, 0)
         player_data_layout.setSpacing(1)  # maintains the 1px gap like other containers
 
@@ -98,18 +104,21 @@ class MainWindow(QMainWindow, Scraper):
             team_container = QWidget()
             team_container.setStyleSheet("background-color: #0c0c0c;")
             player_data_layout.addWidget(team_container)
-                    
+        
+    def create_gui(self):     
         # add all widgets to main layout
-        main_layout.addWidget(matchups_area)
-        matchups_scroll_widget.setFixedHeight(96)
-        matchups_area.setWidget(matchups_scroll_widget)
-
-        main_layout.addWidget(matchups_area)
-        main_layout.addWidget(selected_matchup_area)
-        main_layout.addWidget(player_data_container)      
+        self.config_matchups_bar()
+        self.config_selected_matchup_bar()
+        self.config_team_player_data_sections()
+        self.main_layout.addWidget(self.matchups_area)
+        self.matchups_area.setWidget(self.matchups_scroll_widget)
+        self.main_layout.addWidget(self.matchups_area)
+        self.main_layout.addWidget(self.selected_matchup_area)
+        self.main_layout.addWidget(self.player_data_container)      
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
+    window.create_gui()
     window.showMaximized()
     sys.exit(app.exec())
