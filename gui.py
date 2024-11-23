@@ -4,18 +4,25 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget,
                              QScrollArea)
 from PySide6.QtCore import Qt
 
-class MainWindow(QMainWindow):
+from scraper import Scraper
+
+class MainWindow(QMainWindow, Scraper):
     def __init__(self):
         super().__init__()
+        Scraper.__init__(self) # get functions from custom scraper
+        
         self.setWindowTitle("NHL DFS Assistant")
         self.showMaximized()  # Set to fullscreen mode
-        
+
         # dark gray bg
         self.setStyleSheet("background-color: #1a1a1a;")
         
         # set central widget
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
+        
+        self.matchups = self.get_daily_matchups()
+        self.num_games = self.get_num_games()
         
         # main layout
         main_layout = QVBoxLayout(central_widget)

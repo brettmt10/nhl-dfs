@@ -46,6 +46,9 @@ class Scraper():
             
     def get_daily_matchups(self):
         return self.matchups
+    
+    def get_num_games(self):
+        return self.num_games
                 
     def get_team_player_data():
         # source set up
